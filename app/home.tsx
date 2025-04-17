@@ -187,7 +187,7 @@ export default function HomeScreen() {
       }
 
       
-      const medications = await getMedications();
+  const medications = await getMedications();
       for (const medication of medications) {
         if (medication.reminderEnabled) {
           await scheduleMedicationReminder(medication);

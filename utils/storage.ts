@@ -123,7 +123,7 @@ export async function recordDose(
     history.push(newDose);
     await AsyncStorage.setItem(DOSE_HISTORY_KEY, JSON.stringify(history));
 
-    // Update medication supply if taken
+    
     if (taken) {
       const medications = await getMedications();
       const medication = medications.find((med) => med.id === medicationId);

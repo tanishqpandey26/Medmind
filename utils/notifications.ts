@@ -53,13 +53,13 @@ export async function scheduleMedicationReminder(
   if (!medication.reminderEnabled) return;
 
   try {
-    // Schedule notifications for each time
+  
     for (const time of medication.times) {
       const [hours, minutes] = time.split(":").map(Number);
       const today = new Date();
       today.setHours(hours, minutes, 0, 0);
 
-      // If time has passed for today, schedule for tomorrow
+     
       if (today < new Date()) {
         today.setDate(today.getDate() + 1);
       }
@@ -91,7 +91,7 @@ export async function scheduleRefillReminder(
   if (!medication.refillReminder) return;
 
   try {
-    // Schedule a notification when supply is low
+    
     if (medication.currentSupply <= medication.refillAt) {
       const identifier = await Notifications.scheduleNotificationAsync({
         content: {
@@ -99,7 +99,7 @@ export async function scheduleRefillReminder(
           body: `Your ${medication.name} supply is running low. Current supply: ${medication.currentSupply}`,
           data: { medicationId: medication.id, type: "refill" },
         },
-        trigger: null, // Show immediately
+        trigger: null, 
       });
 
       return identifier;
@@ -136,10 +136,10 @@ export async function updateMedicationReminders(
   medication: Medication
 ): Promise<void> {
   try {
-    // Cancel existing reminders
+
     await cancelMedicationReminders(medication.id);
 
-    // Schedule new reminders
+    
     await scheduleMedicationReminder(medication);
     await scheduleRefillReminder(medication);
   } catch (error) {

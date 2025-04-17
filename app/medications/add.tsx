@@ -130,7 +130,7 @@ export default function AddMedicationScreen() {
       if (isSubmitting) return;
       setIsSubmitting(true);
 
-      // Generate a random color
+     
       const colors = ["#4CAF50", "#2196F3", "#FF9800", "#E91E63", "#9C27B0"];
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
 
@@ -146,7 +146,7 @@ export default function AddMedicationScreen() {
 
       await addMedication(medicationData);
 
-      // Schedule reminders if enabled
+     
       if (medicationData.reminderEnabled) {
         await scheduleMedicationReminder(medicationData);
       }
